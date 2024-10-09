@@ -1,0 +1,94 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    @model List<Patient>
+}
+
+
+@* if the user didnt log in as a doctor, he cannot see this page and will be redirected to login page again
+ *@
+<div class="container" >
+    <div class="row pt-4 pb-3">
+
+        <div class="col-6">
+            <h2 class="text-primary">
+                Patient List
+            </h2>
+        </div>
+
+        <div class="col-6 text-end">
+            <a asp-controller="patients" asp-action="Create" class="btn btn-primary">
+                Add a new patient <i class="bi bi-plus-circle"></i>
+            </a>
+        </div>
+        
+       
+
+    </div>
+
+
+    <div class="table-responsive" style="max-height: 800px; overflow-y: auto;">
+
+        <table class="table table-bordered table-striped">
+
+            <thead>
+                <tr>
+                    <th>
+                        Patient ID
+                    </th>
+                    <th>
+                        Patient Name
+                    </th>
+                    <th>
+                        Old
+                    </th>
+                    <th>
+                        hight
+                    </th>
+                    <th>
+                        Weight
+                    </th>
+                    <th>
+                        View All Test
+                    </th>
+                    <th>
+                        Operations
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach(var obj in Model)
+                {
+                    <tr>
+                        <td>@obj.Id</td>
+                        <td>@obj.PatientName</td>
+                        <td>@obj.PatientOld</td>
+                        <td>@obj.Hight</td>
+                        <td>@obj.Weight</td>
+                        <td>
+                            <a asp-controller="patients" asp-action="ViewTests" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
+                                <i class="bi bi-pencil-square"></i> View all test
+                            </a>
+                        </td>
+                        <td>
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-controller="patients" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+                                <a asp-controller="patients" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+
+
+
+</div>

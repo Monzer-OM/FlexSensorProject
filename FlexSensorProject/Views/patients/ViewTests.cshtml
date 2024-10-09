@@ -1,0 +1,68 @@
+﻿@model FlexSensorProject.Models.Patient
+
+
+
+
+<div class="container">
+
+
+    <div class="row pt-4 pb-3">
+
+        <div class="col-6">
+            <h2 class="text-primary">
+                All Tests for @Model.PatientName
+            </h2>
+
+        </div>
+            <p>Age: @Model.PatientOld</p>
+            <p>Height: @Model.Hight</p>
+            <p>Weight: @Model.Weight</p>
+
+        <div class="col-12 text-end">
+            <a asp-controller="Patients" asp-action="CreateTest" asp-route-patientId="@Model.Id" class="btn btn-primary">
+                Add a new Test
+            </a>
+
+        </div>
+
+    </div>
+   
+
+
+        @if (Model.Tests != null && Model.Tests.Any())
+        {
+
+        <div class="table-responsive" style="max-height: 800px; overflow-y: auto;">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Test Name</th>
+                        <th>Min Value</th>
+                        <th>Avg Value</th>
+                        <th>Max Value</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        @foreach (var test in Model.Tests)
+                        {
+                        <tr>
+                            <td>@test.Patient.PatientName</td>
+                            <td>@test.Minimum</td>
+                            <td>@test.Average</td>
+                            <td>@test.Maximum</td>
+                            <td>@test.date.ToString("dd/MM/yyyy")</td>
+                        </tr>
+                        }
+                </tbody>
+            </table>
+        </div>
+        }
+        else
+        {
+        <p>No tests available for this patient.</p>
+        }
+
+    <a href="@Url.Action("Index", "patients")" class="btn btn-secondary">Back to Patients</a>
+
+</div>

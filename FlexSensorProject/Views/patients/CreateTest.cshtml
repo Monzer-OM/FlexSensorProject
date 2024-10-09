@@ -1,0 +1,58 @@
+﻿@model FlexSensorProject.Models.Test
+
+<form asp-action="CreateTest" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Add New Test for @Model.Patient.PatientName</h2>
+            <hr />
+        </div>
+
+        <!-- Minimum -->
+        <div class="mb-3 row p-1">
+            <label class="p-0" asp-for="Minimum"></label>
+            <input asp-for="Minimum" type="number" class="form-control" />
+            <span asp-validation-for="Minimum" class="text-danger"></span>
+        </div>
+
+        <!-- Maximum -->
+        <div class="mb-3 row p-1">
+            <label class="p-0" asp-for="Maximum"></label>
+            <input asp-for="Maximum" type="number" class="form-control" />
+            <span asp-validation-for="Maximum" class="text-danger"></span>
+        </div>
+
+        <!-- Average -->
+        <div class="mb-3 row p-1">
+            <label class="p-0" asp-for="Average"></label>
+            <input asp-for="Average" type="number" class="form-control" />
+            <span asp-validation-for="Average" class="text-danger"></span>
+        </div>
+
+        <!-- Date -->
+        <div class="mb-3 row p-1">
+            <label class="p-0" asp-for="date"></label>
+            <input asp-for="date" type="date" class="form-control" />
+            <span asp-validation-for="date" class="text-danger"></span>
+        </div>
+
+        <!-- PatientId (hidden field) -->
+        <input asp-for="PatientId" type="hidden" />
+
+        <div class="row">
+            <div class="col-6 text-start col-lg-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Create Test</button>
+            </div>
+            <div class="col-6 text-end col-lg-6 col-md-3">
+                <a asp-controller="Patients" asp-action="ViewTests" asp-route-id="@Model.PatientId" class="btn btn-outline-secondary form-control">
+                    Back to Test List
+                </a>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
